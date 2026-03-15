@@ -32,6 +32,8 @@ const arrowDownSVG = `
  ***************************************************/
 const timeSourceSelect  = document.getElementById("timeSource");
 const timeSourceStatus  = document.getElementById("timeSourceStatus");
+const offsetStartInput  = document.getElementById("offset-start");
+const offsetEndInput    = document.getElementById("offset-end");
 const secretInput       = document.getElementById("secret");
 const digitsInput       = document.getElementById("digits");
 const periodInput       = document.getElementById("period");
@@ -40,6 +42,7 @@ const algorithmSelect   = document.getElementById("algorithm");
 const toggleAdvanced    = document.getElementById("toggleAdvanced");
 const toggleArrow       = document.getElementById("toggleArrow");
 const toggleText        = document.getElementById("toggleText");
+const offsetForm        = document.getElementById("offset-form");
 const advancedSettings  = document.getElementById("advancedSettings");
 
 const countdownElem     = document.getElementById("countdown");
@@ -127,11 +130,33 @@ async function generateTOTP(secret, timeNow, digits, period, algorithm) {
 }
 
 /***************************************************
- * 7. Get Current Unix Time
+ * 7.1 Get Current Unix Time
  ***************************************************/
 function getUnixTime() {
   return Math.floor((Date.now() + onlineTimeOffset) / 1000);
 }
+
+/***************************************************
+ * 7.2 Get Unix Offset Time for deviceOffset mode
+ ***************************************************/
+function getOffsetUnixTime() {
+  if (timeSourceSelect.value === "deviceOffset") {
+    let offsetStartDate = new Date(offsetStartInput.value);
+
+    if (isNaN(offsetStartDate)) {
+      return 0;
+    }
+
+    return Math.floor(
+      (
+        new Date(offsetEndInput.value) - offsetStartDate
+      ) / 1000
+    );
+  } else {
+    return 0;
+  }
+}
+
 
 /***************************************************
  * 8. Animated "Fetching online time" text
@@ -186,11 +211,17 @@ async function fetchOnlineTime() {
 async function handleTimeSourceChange() {
   onlineTimeOffset = 0;
 
-  if (timeSourceSelect.value === "device") {
+  if (timeSourceSelect.value === "deviceOffset") {
     stopFetchingAnimation();
+    offsetForm.style.display = "block";
+    timeSourceStatus.textContent = "Using device time with offset";
+  } else if (timeSourceSelect.value === "device") {
+    stopFetchingAnimation();
+    offsetForm.style.display = "none";
     timeSourceStatus.textContent = "Using device time";
   } else if (timeSourceSelect.value === "online") {
     startFetchingAnimation();
+    offsetForm.style.display = "none";
     try {
       const serverMs = await fetchOnlineTime();
       onlineTimeOffset = serverMs - Date.now();
@@ -225,7 +256,7 @@ async function updateTOTPDisplay() {
     return;
   }
 
-  const unixTime    = getUnixTime();
+  const unixTime    = getUnixTime() - getOffsetUnixTime();
   const currentStep = Math.floor(unixTime / period);
   const nextStep    = (currentStep + 1) * period;
 
@@ -251,11 +282,13 @@ async function updateTOTPDisplay() {
  ***************************************************/
 function updateURLParams() {
   const params = new URLSearchParams();
-  params.set("secret",     secretInput.value.trim());
-  params.set("digits",     digitsInput.value);
-  params.set("period",     periodInput.value);
-  params.set("algorithm",  algorithmSelect.value);
-  params.set("timeSource", timeSourceSelect.value);
+  params.set("secret",      secretInput.value.trim());
+  params.set("digits",      digitsInput.value);
+  params.set("period",      periodInput.value);
+  params.set("algorithm",   algorithmSelect.value);
+  params.set("timeSource",  timeSourceSelect.value);
+  params.set("offsetStart", offsetStartInput.value);
+  params.set("offsetEnd",   offsetEndInput.value);
 
   const newHash = "#" + params.toString();
   window.history.replaceState(null, "", window.location.pathname + newHash);
@@ -282,6 +315,14 @@ function loadConfigFromURL() {
   }
   if (params.has("timeSource")) {
     timeSourceSelect.value = params.get("timeSource");
+  }
+  if (params.has("offsetStart")) {
+    offsetStartInput.value = params.get("offsetStart");
+  }
+  if (params.has("offsetEnd")) {
+    offsetEndInput.value = params.get("offsetEnd");
+  } else {
+    offsetEndInput.value = new Date().toISOString().slice(0, 16);
   }
 }
 
@@ -409,7 +450,7 @@ openOrCloseAdvancedPanel();
 if (timeSourceSelect.value === "online") {
   handleTimeSourceChange().catch(err => console.error(err));
 } else {
-  timeSourceStatus.textContent = "Using device time";
+  timeSourceStatus.textContent = "Using device time with offset";
 }
 
 // 4) Start TOTP auto-refresh

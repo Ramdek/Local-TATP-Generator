@@ -35,7 +35,10 @@
   />
 
   <!-- Link to external CSS -->
-  <link href="./styles.css?v=1.0.0" rel="stylesheet" integrity="sha256-E7IkTj7Hjd6WaXm0B1Eq4ygh84+0RHAzPhto/x/A9ZU= sha384-ADrOYXBSy52zL8zEfpok4mTIl/RIgflOUzS7/1c42x2Pzk4GhnxLwYHZR5jl0Dtm sha512-MQoEj2aEMhsKrVnpYJX/pbFu+aqPBO0Z3D9fwiS2D1AUrfbVwF6BS8fA2RwYZtyTYB8fwf9mqeSsPrfFOjku+A==" crossorigin="anonymous" />
+  <link href="./styles.css" rel="stylesheet" integrity="sha256-l0ezKB1SHURb0xdvMn3dwrzDulOYDXeIqdn8MSgWka4= sha384-7G7Dl2qoyDXHno3b/TfJeOiCb0denNbOUVyQeUr5xV/wsyMYvBCxjMXLz8FGCgRV sha512-+LqRjndvCG3fE94jFynsWXP1Gdcija8tNkzFfLrHXMNOMex7dB+uatCTMSDrQEZC4nThruhhHZG2FYgOJ3u2qg==" crossorigin="anonymous" />
+
+  <!-- JavaScript for TOTP Logic -->
+  <script defer src="./script.js" integrity="sha256-cXye9z1a4aPM9Tftxz6H2h3+vdviwEHEH9X+n3ez8rA= sha384-ct45lnU7Bd/aEu56nBAlGZkPN1weHX20qFma859Nx+WfaUWJ8VSniEUP5PXY0rhA  sha512-GBgu5TaGmEIVCObB8icvNzoPig53Ut3hGuHTk/lyKBg4O+niocjk1L3dNIYCLFNsTsYfll9P2X4pk/HYVYA0AQ==" crossorigin="anonymous"></script></body>
 </head>
 
 <body>
@@ -56,10 +59,23 @@
     <div class="form-group">
       <label for="timeSource">Time Source</label>
       <select id="timeSource">
+        <option value="deviceOffset">Device Time with Offset</option>
         <option value="device">Device Time</option>
         <option value="online">Online Time (TimeAPI.io)</option>
       </select>
       <small id="timeSourceStatus" class="time-status">Using device time</small>
+    </div>
+
+    <!-- Device Time Offset -->
+    <div id="offset-form">
+      <div class="form-group">
+        <label for="offset-start">Offset start</label>
+        <input type="datetime-local" id="offset-start" step="2" />
+      </div>
+      <div class="form-group">
+        <label for="offset-end">Offset end</label>
+        <input type="datetime-local" id="offset-end" step="2" />
+      </div>
     </div>
 
     <!-- Secret Input Field -->
@@ -142,7 +158,4 @@
       </p>
     </div>
   </footer>
-
-  <!-- JavaScript for TOTP Logic -->
-  <script src="./script.js?v=2.0.0" integrity="sha256-drazCt5NOjt5p0c0WmaA3ImGGELExXnH1d84GdWvlyc= sha384-M+fKyr+Iv0Ghx7W/gx/oReiorV2vXh5pdw66xWN4Ift5lGQTVaPJAK8hrisIZwv6 sha512-u8PobpnuUdELBo+rENmRZnAKG6o+/0heP5VmvV4lwkT8tA7GP/5awDdOv3dQTGILX+JCBukoekko8ORztUr/eQ==" crossorigin="anonymous"></script></body>
 </html>

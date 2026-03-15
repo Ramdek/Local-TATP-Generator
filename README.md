@@ -1,9 +1,9 @@
 
-# Local TOTP Generator
+# Local TATP Generator
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://opensource.org/licenses/GPL-3.0)
 
-[Local TOTP Generator](https://localtotp.com/) is a secure, offline tool for generating Time-Based One-Time Passwords (TOTPs). It leverages the [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) to ensure that all cryptographic operations occur locally in your browser—without ever exposing your secret key to a server.
+[Local TATP Generator](https://ramdek.github.io/Local-TATP-Generator/) is a secure, offline tool for generating Time-Based One-Time Passwords (TOTPs). It leverages the [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) to ensure that all cryptographic operations occur locally in your browser—without ever exposing your secret key to a server.
 
 ## Table of Contents
 
@@ -20,12 +20,12 @@
 
 ## Overview
 
-Local TOTP Generator is designed for developers and security-conscious users who need a flexible and reliable TOTP solution. Whether you require the standard 6-digit, 30-second code or need custom settings for specific services, this tool offers the flexibility to match your requirements—all without sending your data over the network.
+Local TATP Generator is designed for developers and security-conscious users who need a flexible and reliable TOTP solution. Whether you require the standard 6-digit, 30-second code or need custom settings for specific services, this tool offers the flexibility to match your requirements—all without sending your data over the network.
 
 ## Features
 
 - **Offline Generation:** Uses the browser’s native [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) to generate TOTPs locally.
-- **Customizable Settings:** Adjust the digit length, period (in seconds), and cryptographic algorithm (SHA-1, SHA-256, or SHA-512) to suit your needs.
+- **Customizable Settings:** Adjust the seed, digit length, period (in seconds), and cryptographic algorithm (SHA-1, SHA-256, or SHA-512) to suit your needs.
 - **Dual Time Sources:** Choose to rely on your device’s clock or fetch the current time from [TimeAPI.io](https://timeapi.io/).
 - **Real-Time Updates:** Displays the current TOTP, the next TOTP, and a live countdown timer.
 - **Shareable Configuration:** Easily copy a URL that contains your configuration parameters for quick sharing or backup.
@@ -50,6 +50,11 @@ For users who are security-conscious, generating TOTPs offline means your secret
 
 Sometimes, standard 2FA settings don't meet all requirements. With customizable options such as digit length, period, and algorithm, Local TOTP Generator adapts to unique scenarios—whether you need a non-standard configuration for a specific service or simply want more control over your authentication process.
 
+#### 5. Time-offset TOTP Generation *(This fork)*
+
+Ever been locked-out of a TOTP enabled device because of time drift ?  
+The TOTP for this device can be recover by entering time offset.
+
 ## How It Works
 
 Local TOTP Generator implements the standard TOTP algorithm as defined in [RFC 6238](https://tools.ietf.org/html/rfc6238):
@@ -62,8 +67,7 @@ Local TOTP Generator implements the standard TOTP algorithm as defined in [RFC 6
 ## Usage
 
 1. **Open the Tool:**
-   - Visit [localtotp.com](https://localtotp.com/).   
-     *(Cloudflare Pages hosted clone of this repository)* 
+   - Open deployed [pages](https://ramdek.github.io/Local-TATP-Generator/).
 
 2. **Enter Your Secret:**
    - Input your Base32-encoded secret key into the provided field.
@@ -86,8 +90,8 @@ To run or modify the Local TOTP Generator locally:
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/tommyvange/Local-TOTP-Generator.git
-   cd Local-TOTP-Generator
+   git clone https://github.com/Ramdek/Local-TATP-Generator.git
+   cd Local-TATP-Generator
    ```
    
 2.  **Open the Project:**
@@ -138,16 +142,6 @@ Local TOTP Generator is released under the [GPL-3.0 License](LICENSE). You are f
 </table>
 <!-- readme: tommyvange -end -->
 
-You can find more of my work on my [GitHub profile](https://github.com/tommyvange) or connect with me on [LinkedIn](https://www.linkedin.com/in/tommyvange/).
-
-### Contributors
-Huge thanks to everyone who dedicates their valuable time to improving, perfecting, and supporting this project!
-
-<!-- readme: contributors,tommyvange/- -start -->
-<table>
-	<tbody>
-	<tbody>
-</table>
-<!-- readme: contributors,tommyvange/- -end -->
+His [GitHub profile](https://github.com/tommyvange).
 
 ----------

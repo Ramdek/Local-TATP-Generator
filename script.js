@@ -415,29 +415,28 @@ console.log(
 
 // Styled personal boast message
 console.log(
-    '%cThis projected was created with ❤️ by Tommy Vange Rød' +
-    '%c\n\n\nLinkedIn Profile: %chttps://www.linkedin.com/in/tommyvange/' +
-    '%c\nGitHub Profile: %chttps://github.com/tommyvange',
+    '\n%cThis projected was created with ❤️ by Tommy Vange Rød' +
+    '%c\n\nGitHub Profile: %chttps://github.com/tommyvange' +
+    '\n\n%cRemixed 💥 by Ramdek' +
+    '%c\n\nGitHub Profile: %chttps://github.com/Ramdek',
     'color: #fff; background: #007BFF; padding: 4px 8px; border-radius: 4px; font-size: 16px;margin-top: 15px;',
     'color: #007BFF; font-style: italic; font-size: 14px;',
     'color: #1d6f42; text-decoration: underline; font-size: 14px;',
+    'color: #fff; background: #007BFF; padding: 4px 8px; border-radius: 4px; font-size: 16px;margin-top: 15px;',
     'color: #007BFF; font-style: italic; font-size: 14px;',
     'color: #1d6f42; text-decoration: underline; font-size: 14px;margin-bottom: 15px;'
 );
 
 // Project links
 console.log(
-    '%cThe project is 100%% open-source, licensed under GPL-3.0 and hosted via Cloudflare Pages.' +
-    '%c\n\n\nProject: %chttps://github.com/tommyvange/Local-TOTP-Generator' +
-    '%c\nLicense: %chttps://github.com/tommyvange/Local-TOTP-Generator/blob/main/LICENSE' +
-    '%c\nCloudflare Pages: %chttps://pages.cloudflare.com/',
+    '%cThe project is 100%% open-source, licensed under GPL-3.0.' +
+    '%c\n\n\nProject: %chttps://github.com/Ramdek/TATP-Generator' +
+    '%c\nLicense: %chttps://github.com/Ramdek/TATP-Generator/blob/main/LICENSE',
     'color: #007BFF; font-size: 14px;margin-top: 15px;',
     'color: #007BFF; font-style: italic; font-size: 14px;',
     'color: #1d6f42; text-decoration: underline; font-size: 14px;',
     'color: #007BFF; font-style: italic; font-size: 14px;',
     'color: #1d6f42; text-decoration: underline; font-size: 14px;',
-    'color: #007BFF; font-style: italic; font-size: 14px;',
-    'color: #1d6f42; text-decoration: underline; font-size: 14px;margin-bottom: 15px;'
 );
 
 // 1) Load config from URL
